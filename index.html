@@ -2,41 +2,66 @@
 <html lang="fi">
 <head>
   <meta charset="UTF-8">
-  <title>allun nettiradio
-      margin-top: 30px;
+  <title>SAVON RADIOT</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: white;
+      text-align: center;
+      padding-top: 50px;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    audio {
       width: 300px;
       border-radius: 10px;
     }
 
-    .weather {
+    .footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      opacity: 0.7;
+    }
+
+    .weather-widget {
       position: absolute;
       bottom: 10px;
       right: 10px;
-    }
-
-    .footer {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      font-size: 0.9em;
-      color: #ccc;
+      width: 300px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
     }
   </style>
 </head>
 <body>
-  <h1>🎧 RADIO SAVO (savonlinna)</h1>
+  <h1>🎧 [RADIO SAVO]</h1>
   <audio controls autoplay>
     <source src="http://SUNEN-IP:8000/radio" type="audio/mpeg">
     Selaimesi ei tue audiotoimintoa.
   </audio>
-
-  <!-- Savonlinnan sää-widget -->
-  <div class="weather">
-    <iframe src="https://forecast7.com/fi/61d8715d32/savonlinna/" frameborder="0" width="250" height="180"></iframe>
+  <div class="footer">
+    © 2025 perunankuusi studiot – Kaikki oikeudet pidätetään
   </div>
 
-  <div class="footer">
-    © 2025 Perunankuusi studiot
+  <!-- SAVONLINNAN SÄÄ -->
+  <div class="weather-widget">
+    <iframe 
+      src="https://ilmatieteenlaitos.fi/saa/savonlinna?show=webWidget" 
+      width="100%" 
+      height="100%" 
+      style="border:0;" 
+      title="Savonlinnan sää">
+    </iframe>
   </div>
 </body>
 </html>
