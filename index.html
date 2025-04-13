@@ -2,41 +2,41 @@
 <html lang="fi">
 <head>
   <meta charset="UTF-8">
-  <title>Radio Savo</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(to right, #1e3c72, #2a5298);
-      color: white;
-      text-align: center;
-      padding: 50px;
-    }
-
-    h1 {
-      font-size: 3em;
-      margin-bottom: 20px;
-    }
-
-    audio {
+  <title>allun nettiradio
+      margin-top: 30px;
       width: 300px;
       border-radius: 10px;
     }
 
+    .weather {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+
     .footer {
-      margin-top: 40px;
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
       font-size: 0.9em;
-      opacity: 0.7;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
-  <h1> Tervetuloa kuuntelemaan RADIO SAVOA!</h1>
+  <h1>🎧 RADIO SAVO (savonlinna)</h1>
   <audio controls autoplay>
     <source src="http://SUNEN-IP:8000/radio" type="audio/mpeg">
-    Selaimesi ei tue soitinta.
+    Selaimesi ei tue audiotoimintoa.
   </audio>
+
+  <!-- Savonlinnan sää-widget -->
+  <div class="weather">
+    <iframe src="https://forecast7.com/fi/61d8715d32/savonlinna/" frameborder="0" width="250" height="180"></iframe>
+  </div>
+
   <div class="footer">
-    © 2025 Allun Nettiradio – Kaikki oikeudet pidätetään
+    © 2025 Perunankuusi studiot
   </div>
 </body>
 </html>
