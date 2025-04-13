@@ -2,13 +2,41 @@
 <html lang="fi">
 <head>
   <meta charset="UTF-8">
-  <title>Oma Nettiradio</title>
+  <title>Radio Savo</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    audio {
+      width: 300px;
+      border-radius: 10px;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      opacity: 0.7;
+    }
+  </style>
 </head>
 <body>
-  <h1>Tervetuloa kuuntelemaan meidän nettiradiota!</h1>
+  <h1>🎧 Tervetuloa kuuntelemaan RADIO SAVOA!</h1>
   <audio controls autoplay>
     <source src="http://SUNEN-IP:8000/radio" type="audio/mpeg">
-    Selaimesi ei tue audiotoimintoa.
+    Selaimesi ei tue soitinta.
   </audio>
+  <div class="footer">
+    © 2025 Allun Nettiradio – Kaikki oikeudet pidätetään
+  </div>
 </body>
 </html>
