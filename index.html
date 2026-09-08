@@ -1,54 +1,586 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-  <meta charset="UTF-8">
-  <title>perunankuusi studiot</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #1e3c72, #2a5298);
-      color: white;
-      text-align: center;
-      padding-top: 50px;
-      height: 100vh;
-      overflow: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TDI3 Autotekniikka — VAG-erikoisliike, 3.0 TDI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F4F5F1;
+    --surface: #FFFFFF;
+    --ink: #1B2230;
+    --ink-soft: #5C6472;
+    --line: #DCDFD7;
+    --amber: #DE9A2E;
+    --amber-deep: #B87A1C;
+    --petrol: #2E5B66;
+    --petrol-deep: #203F48;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.plate-label{
+    font-family:'Barlow Condensed', sans-serif;
+    letter-spacing:0.01em;
+    margin:0;
+  }
+  a{color:inherit;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  /* NAV */
+  header{
+    position:sticky;
+    top:0;
+    background:rgba(244,245,241,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    z-index:50;
+  }
+  nav.wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:68px;
+  }
+  .logo{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    font-size:1.5rem;
+    display:flex;
+    align-items:baseline;
+    gap:6px;
+  }
+  .logo span{color:var(--amber-deep);}
+  .navlinks{
+    display:flex;
+    gap:32px;
+    font-size:0.95rem;
+    font-weight:500;
+  }
+  .navlinks a{
+    text-decoration:none;
+    color:var(--ink-soft);
+    padding:4px 0;
+    border-bottom:2px solid transparent;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{
+    color:var(--ink);
+    border-bottom-color:var(--amber);
+  }
+  .navlinks a.cta{
+    color:var(--surface);
+    background:var(--petrol-deep);
+    padding:9px 18px;
+    border-radius:3px;
+    border-bottom:none;
+  }
+  .navlinks a.cta:hover{background:var(--petrol);}
+  @media (max-width:760px){
+    .navlinks{display:none;}
+  }
 
-    h1 {
-      font-size: 3em;
-      margin-bottom: 20px;
-    }
+  /* HERO */
+  .hero{
+    padding:76px 0 88px;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    color:var(--amber-deep);
+    font-weight:600;
+    font-size:0.92rem;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 5vw, 3.9rem);
+    font-weight:700;
+    line-height:1.02;
+    margin-top:10px;
+    color:var(--petrol-deep);
+  }
+  .hero p.lede{
+    margin-top:20px;
+    font-size:1.14rem;
+    color:var(--ink-soft);
+    max-width:46ch;
+  }
+  .hero-ctas{
+    margin-top:32px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block;
+    padding:13px 24px;
+    border-radius:3px;
+    font-weight:600;
+    font-size:0.98rem;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+  }
+  .btn-primary{background:var(--petrol-deep); color:#fff;}
+  .btn-primary:hover{background:var(--petrol);}
+  .btn-outline{border-color:var(--line); background:transparent; color:var(--ink);}
+  .btn-outline:hover{border-color:var(--ink);}
 
-    audio {
-      width: 300px;
-      border-radius: 10px;
-    }
+  /* Spec plate */
+  .plate{
+    background:linear-gradient(160deg, #EDEFEA 0%, #DDE0D8 55%, #EDEFEA 100%);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:28px 26px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5);
+    opacity:0;
+    animation: plateIn .7s ease forwards .15s;
+  }
+  @keyframes plateIn{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  .plate-label{
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    font-family:'Work Sans', sans-serif;
+    letter-spacing:0.03em;
+  }
+  .plate-title{
+    font-size:2.6rem;
+    font-weight:700;
+    color:var(--petrol-deep);
+    line-height:1;
+    margin:6px 0 18px;
+  }
+  .plate-rows{
+    border-top:1px solid var(--line);
+  }
+  .plate-row{
+    display:flex;
+    justify-content:space-between;
+    padding:9px 0;
+    border-bottom:1px solid var(--line);
+    font-size:0.94rem;
+  }
+  .plate-row span:first-child{color:var(--ink-soft);}
+  .plate-row span:last-child{font-weight:600;}
 
-    .footer {
-      margin-top: 40px;
-      font-size: 0.9em;
-      opacity: 0.7;
-    }
+  /* SECTIONS */
+  section{padding:78px 0;}
+  section.alt{background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .section-head{
+    max-width:56ch;
+    margin-bottom:46px;
+  }
+  .section-head .eyebrow{display:block; margin-bottom:8px;}
+  .section-head h2{
+    font-size:2.1rem;
+    font-weight:600;
+    color:var(--petrol-deep);
+  }
+  .section-head p{
+    margin-top:12px;
+    color:var(--ink-soft);
+  }
 
-    .weather-widget {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      width: 300px;
-      height: 200px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-  </style>
+  /* SERVICES */
+  .services{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .service{
+    background:var(--bg);
+    padding:32px 28px;
+  }
+  .service .num{
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:0.95rem;
+    color:var(--amber-deep);
+    font-weight:600;
+  }
+  .service h3{
+    font-size:1.4rem;
+    font-weight:600;
+    margin-top:10px;
+    color:var(--ink);
+  }
+  .service p{
+    margin-top:10px;
+    color:var(--ink-soft);
+    font-size:0.98rem;
+  }
+  @media (max-width:760px){
+    .services{grid-template-columns:1fr;}
+    .hero-grid{grid-template-columns:1fr;}
+  }
+
+  /* ABOUT / EXPERTISE */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+    align-items:start;
+  }
+  .about-grid p{color:var(--ink-soft); margin-top:14px;}
+  .about-grid p:first-child{margin-top:0;}
+  .spec-list{
+    list-style:none;
+    padding:0;
+    margin:0;
+    border-top:1px solid var(--line);
+  }
+  .spec-list li{
+    display:flex;
+    justify-content:space-between;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    font-size:0.96rem;
+  }
+  .spec-list li span:first-child{color:var(--ink-soft);}
+  .spec-list li span:last-child{font-weight:600; font-family:'Barlow Condensed', sans-serif; font-size:1.05rem;}
+  @media (max-width:760px){.about-grid{grid-template-columns:1fr;}}
+
+  /* MARKETPLACE PREVIEW */
+  .badge{
+    display:inline-block;
+    background:var(--amber);
+    color:#2A1A02;
+    font-weight:600;
+    font-size:0.78rem;
+    padding:4px 10px;
+    border-radius:3px;
+    margin-bottom:14px;
+  }
+  .listing-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  .listing-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .listing-thumb{
+    height:130px;
+    background:linear-gradient(135deg, #E3E6DD, #CFD3C8);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--ink-soft);
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:0.85rem;
+    letter-spacing:0.03em;
+  }
+  .listing-body{padding:18px;}
+  .listing-body h4{
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:1.2rem;
+    font-weight:600;
+    margin:0;
+  }
+  .listing-meta{
+    display:flex;
+    justify-content:space-between;
+    margin-top:8px;
+    font-size:0.86rem;
+    color:var(--ink-soft);
+  }
+  .listing-price{
+    margin-top:12px;
+    font-weight:700;
+    color:var(--petrol-deep);
+    font-size:1.05rem;
+  }
+  @media (max-width:760px){.listing-grid{grid-template-columns:1fr;}}
+
+  /* FORUM PREVIEW */
+  .forum-list{
+    border-top:1px solid var(--line);
+  }
+  .forum-row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .forum-row .topic h4{
+    font-size:1.05rem;
+    font-weight:600;
+    font-family:'Work Sans', sans-serif;
+  }
+  .forum-row .topic p{
+    margin:4px 0 0;
+    color:var(--ink-soft);
+    font-size:0.88rem;
+  }
+  .forum-row .meta{
+    text-align:right;
+    color:var(--ink-soft);
+    font-size:0.86rem;
+    white-space:nowrap;
+  }
+
+  /* CONTACT */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+  }
+  .field{margin-bottom:18px;}
+  .field label{
+    display:block;
+    font-size:0.88rem;
+    font-weight:600;
+    margin-bottom:6px;
+    color:var(--ink-soft);
+  }
+  .field input, .field textarea{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.96rem;
+    background:var(--surface);
+    color:var(--ink);
+  }
+  .field input:focus, .field textarea:focus{
+    outline:2px solid var(--amber);
+    outline-offset:1px;
+    border-color:var(--amber);
+  }
+  .contact-info h3{font-size:1.3rem; font-weight:600; color:var(--petrol-deep);}
+  .contact-info .spec-list{margin-top:20px;}
+
+  footer{
+    padding:36px 0;
+    border-top:1px solid var(--line);
+    color:var(--ink-soft);
+    font-size:0.88rem;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .plate{animation:none; opacity:1;}
+    html{scroll-behavior:auto;}
+  }
+</style>
 </head>
 <body>
-  <h1> [RADIO SAVO]</h1>
-  <audio controls autoplay>
-    <source src="http://192.168.1.1:8000/radio" type="audio/mpeg">
-    Selaimesi ei tue audiotoimintoa.
-  </audio>
-  <div class="footer">
-    © 2025 perunankuusi studiot – Kaikki oikeudet pidätetään
+
+<header>
+  <nav class="wrap">
+    <div class="logo">TDI<span>3</span> <span style="color:var(--ink); font-weight:500; font-size:1rem; margin-left:4px;">Autotekniikka</span></div>
+    <div class="navlinks">
+      <a href="#palvelut">Palvelut</a>
+      <a href="#osaaminen">Osaaminen</a>
+      <a href="#kauppapaikka">Kauppapaikka</a>
+      <a href="#foorumi">Foorumi</a>
+      <a href="#yhteys" class="cta">Ota yhteyttä</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">VAG-erikoisliike</div>
+      <h1>3.0 TDI on&nbsp;erikoisalaamme, ei sivutoimi.</h1>
+      <p class="lede">Huollamme, diagnosoimme ja välitämme ohjelmoinnin Audi-, VW- ja Porsche-mallien 3.0-litraisille V6 TDI -moottoreille. Tunnemme tyypilliset vikamekanismit ja osaamme lukea koodit oikein ensimmäisellä kerralla.</p>
+      <div class="hero-ctas">
+        <a href="#yhteys" class="btn btn-primary">Varaa aika</a>
+        <a href="#palvelut" class="btn btn-outline">Katso palvelut</a>
+      </div>
+    </div>
+    <div class="plate">
+      <div class="plate-label">MOOTTORITUNNUS</div>
+      <div class="plate-title">3.0 TDI · V6</div>
+      <div class="plate-rows">
+        <div class="plate-row"><span>Sylinterit</span><span>V6, 24V</span></div>
+        <div class="plate-row"><span>Ruiskutus</span><span>Common Rail</span></div>
+        <div class="plate-row"><span>Käyttö</span><span>Audi / VW / Porsche</span></div>
+        <div class="plate-row"><span>Erikoisala</span><span>Huolto · Diagnostiikka · Ohjelmointi</span></div>
+      </div>
+    </div>
   </div>
+</section>
+
+<section id="palvelut" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Palvelut</span>
+      <h2>Kolme asiaa, jotka teemme kunnolla</h2>
+      <p>Emme yritä tehdä kaikkea kaikille merkeille — keskitymme VAG-konsernin 3.0 TDI -moottoreihin, jolloin osaaminen on syvempää kuin yleiskorjaamossa.</p>
+    </div>
+    <div class="services">
+      <div class="service">
+        <div class="num">01</div>
+        <h3>Perushuolto</h3>
+        <p>Öljynvaihdot, suodattimet, jakoketjun kunnon tarkistus ja muut 3.0 TDI -moottorin tunnetut huoltokohteet valmistajan väliajoin.</p>
+      </div>
+      <div class="service">
+        <div class="num">02</div>
+        <h3>Vikakoodien luku</h3>
+        <p>OBD-diagnostiikka VAG-merkkikohtaisilla työkaluilla. Selkeä selvitys löydöksistä ja korjausehdotus — ei arvailua.</p>
+      </div>
+      <div class="service">
+        <div class="num">03</div>
+        <h3>Ohjelmoinnin välitys</h3>
+        <p>Välitämme ohjaimen ohjelmoinnin ja viritystyöt luotetun yhteistyökumppanin kautta, ja hoidamme auton vastaanoton ja luovutuksen paikan päällä.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="osaaminen">
+  <div class="wrap about-grid">
+    <div>
+      <span class="eyebrow">Miksi juuri 3.0 TDI</span>
+      <h2 style="font-size:2.1rem; font-weight:600; color:var(--petrol-deep); margin-top:10px;">Sama moottori, kymmenet variaatiot</h2>
+      <p>3.0 TDI -moottoria on käytetty Audi A6:sta Q7:ään ja Touaregista Cayenneen, tehoiltaan ja ohjainversioiltaan vaihdellen. Tämä vaatii huoltajalta mallikohtaista tuntemusta — sama vikakoodi voi tarkoittaa eri asiaa moottorisukupolvesta riippuen.</p>
+      <p>Olemme keskittyneet tähän moottoriperheeseen, jotta pystymme tunnistamaan toistuvat vikamekanismit nopeasti sen sijaan, että aloittaisimme joka kerta alusta.</p>
+    </div>
+    <ul class="spec-list">
+      <li><span>Tyypillinen käyttö</span><span>Audi A6 / A7 / A8 / Q5 / Q7</span></li>
+      <li><span>Myös</span><span>VW Touareg, Porsche Cayenne</span></li>
+      <li><span>Yleisimmät huoltokohteet</span><span>Jakoketju, EGR, turbo</span></li>
+      <li><span>Diagnostiikka</span><span>Merkkikohtaiset työkalut</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="kauppapaikka" class="alt">
+  <div class="wrap">
+    <span class="badge">Tulossa pian</span>
+    <div class="section-head" style="margin-bottom:34px;">
+      <h2>Kauppapaikka VAG-autoille</h2>
+      <p>Rakennamme välitystoimisto-tyyppistä kauppapaikkaa, jossa myyjät ja ostajat kohtaavat suoraan. Alla esimerkki siitä, miltä ilmoitukset tulevat näyttämään.</p>
+    </div>
+    <div class="listing-grid">
+      <div class="listing-card">
+        <div class="listing-thumb">KUVA TULOSSA</div>
+        <div class="listing-body">
+          <h4>Audi A6 C7 3.0 TDI</h4>
+          <div class="listing-meta"><span>2016 · 210 000 km</span><span>Quattro</span></div>
+          <div class="listing-price">Esimerkkihinta</div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-thumb">KUVA TULOSSA</div>
+        <div class="listing-body">
+          <h4>Audi Q7 4M 3.0 TDI</h4>
+          <div class="listing-meta"><span>2018 · 165 000 km</span><span>Quattro</span></div>
+          <div class="listing-price">Esimerkkihinta</div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-thumb">KUVA TULOSSA</div>
+        <div class="listing-body">
+          <h4>VW Touareg 3.0 TDI</h4>
+          <div class="listing-meta"><span>2015 · 198 000 km</span><span>4Motion</span></div>
+          <div class="listing-price">Esimerkkihinta</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="foorumi">
+  <div class="wrap">
+    <span class="badge">Tulossa pian</span>
+    <div class="section-head" style="margin-bottom:10px;">
+      <h2>Foorumi</h2>
+      <p>Oma keskustelualue 3.0 TDI -omistajille: vikakoodit, huoltokokemukset ja ohjelmointimuutokset yhdessä paikassa. Alla esimerkki keskustelunavauksista.</p>
+    </div>
+    <div class="forum-list">
+      <div class="forum-row">
+        <div class="topic">
+          <h4>P0299 alipainevika, mistä aloittaa?</h4>
+          <p>Audi A6 C7 · 5 vastausta</p>
+        </div>
+        <div class="meta">Esimerkkiketju</div>
+      </div>
+      <div class="forum-row">
+        <div class="topic">
+          <h4>Jakoketjun venymä — millä ajokilometrillä tarkistutitte?</h4>
+          <p>Yleinen · 12 vastausta</p>
+        </div>
+        <div class="meta">Esimerkkiketju</div>
+      </div>
+      <div class="forum-row">
+        <div class="topic">
+          <h4>Ohjelmoinnin jälkeinen kulutus, kokemuksia?</h4>
+          <p>Q7 4M · 3 vastausta</p>
+        </div>
+        <div class="meta">Esimerkkiketju</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="yhteys" class="alt">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="section-head" style="margin-bottom:26px;">
+        <span class="eyebrow">Yhteystiedot</span>
+        <h2>Varaa huoltoaika</h2>
+      </div>
+      <form onsubmit="return false;">
+        <div class="field">
+          <label for="nimi">Nimi</label>
+          <input id="nimi" type="text" placeholder="Etu- ja sukunimi">
+        </div>
+        <div class="field">
+          <label for="malli">Auton malli ja vuosimalli</label>
+          <input id="malli" type="text" placeholder="esim. Audi A6 C7, 2016">
+        </div>
+        <div class="field">
+          <label for="viesti">Viesti</label>
+          <textarea id="viesti" rows="4" placeholder="Kerro lyhyesti, mistä on kyse"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Lähetä pyyntö</button>
+      </form>
+    </div>
+    <div class="contact-info">
+      <h3>TDI3 Autotekniikka</h3>
+      <ul class="spec-list">
+        <li><span>Osoite</span><span>Lisätään myöhemmin</span></li>
+        <li><span>Puhelin</span><span>Lisätään myöhemmin</span></li>
+        <li><span>Sähköposti</span><span>info@tdi3.fi</span></li>
+        <li><span>Aukioloajat</span><span>Ma–Pe 8–17</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span>© 2026 TDI3 Autotekniikka</span>
+  <span>Kauppapaikka ja foorumi avataan myöhemmin</span>
+</footer>
+
+</body>
+</html>
