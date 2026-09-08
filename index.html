@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TDI3 Autotekniikka — VAG-erikoisliike, 3.0 TDI</title>
+<title>VAG Huolto A. Anttonen — VAG-erikoisliike, 3.0 TDI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -140,6 +140,20 @@
   .btn-outline{border-color:var(--line); background:transparent; color:var(--ink);}
   .btn-outline:hover{border-color:var(--ink);}
 
+  .hero-photo{
+    border-radius:6px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    margin-bottom:16px;
+    aspect-ratio:4/3;
+  }
+  .hero-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
   /* Spec plate */
   .plate{
     background:linear-gradient(160deg, #EDEFEA 0%, #DDE0D8 55%, #EDEFEA 100%);
@@ -257,6 +271,35 @@
   .spec-list li span:first-child{color:var(--ink-soft);}
   .spec-list li span:last-child{font-weight:600; font-family:'Barlow Condensed', sans-serif; font-size:1.05rem;}
   @media (max-width:760px){.about-grid{grid-template-columns:1fr;}}
+
+  /* PHOTO GALLERY */
+  .photo-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  .photo-card{
+    margin:0;
+    border-radius:6px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:var(--surface);
+  }
+  .photo-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    display:block;
+  }
+  .photo-card figcaption{
+    padding:12px 14px;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    font-weight:500;
+  }
+  @media (max-width:760px){
+    .photo-grid{grid-template-columns:1fr;}
+  }
 
   /* MARKETPLACE PREVIEW */
   .badge{
@@ -394,10 +437,11 @@
 
 <header>
   <nav class="wrap">
-    <div class="logo">TDI<span>3</span> <span style="color:var(--ink); font-weight:500; font-size:1rem; margin-left:4px;">Autotekniikka</span></div>
+    <div class="logo">VAG <span>Huolto</span> <span style="color:var(--ink); font-weight:500; font-size:1rem; margin-left:4px;">A. Anttonen</span></div>
     <div class="navlinks">
       <a href="#palvelut">Palvelut</a>
       <a href="#osaaminen">Osaaminen</a>
+      <a href="#galleria">Galleria</a>
       <a href="#kauppapaikka">Kauppapaikka</a>
       <a href="#foorumi">Foorumi</a>
       <a href="#yhteys" class="cta">Ota yhteyttä</a>
@@ -416,6 +460,10 @@
         <a href="#palvelut" class="btn btn-outline">Katso palvelut</a>
       </div>
     </div>
+    <div>
+    <div class="hero-photo">
+      <img src="images/audi-front.jpg" alt="Audi A6 3.0 TDI, VAG Huolto A. Anttonen">
+    </div>
     <div class="plate">
       <div class="plate-label">MOOTTORITUNNUS</div>
       <div class="plate-title">3.0 TDI · V6</div>
@@ -425,6 +473,7 @@
         <div class="plate-row"><span>Käyttö</span><span>Audi / VW / Porsche</span></div>
         <div class="plate-row"><span>Erikoisala</span><span>Huolto · Diagnostiikka · Ohjelmointi</span></div>
       </div>
+    </div>
     </div>
   </div>
 </section>
@@ -470,6 +519,30 @@
       <li><span>Yleisimmät huoltokohteet</span><span>Jakoketju, EGR, turbo</span></li>
       <li><span>Diagnostiikka</span><span>Merkkikohtaiset työkalut</span></li>
     </ul>
+  </div>
+</section>
+
+<section id="galleria" style="border-top:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Työn jälkeä</span>
+      <h2>Oma Audi, samat työkalut</h2>
+      <p>Kuvia omasta A6 3.0 TDI -mallista ja ohjaimen ohjelmointityöstä — samaa jälkeä ja samoja työkaluja käytämme asiakkaidenkin autoissa.</p>
+    </div>
+    <div class="photo-grid">
+      <figure class="photo-card">
+        <img src="images/audi-rear-badge.jpg" alt="Audi A6 3.0 TDI takaa, moottoritunnus näkyvissä">
+        <figcaption>Audi A6, 3.0 TDI</figcaption>
+      </figure>
+      <figure class="photo-card">
+        <img src="images/audi-programming.jpg" alt="Ohjaimen ohjelmointi kannettavalla tietokoneella">
+        <figcaption>Ohjaimen ohjelmointi</figcaption>
+      </figure>
+      <figure class="photo-card">
+        <img src="images/audi-night.jpg" alt="Audi A6 3.0 TDI huoltoasemalla illalla">
+        <figcaption>Huollon jälkeen, valmiina ajoon</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -566,11 +639,11 @@
       </form>
     </div>
     <div class="contact-info">
-      <h3>TDI3 Autotekniikka</h3>
+      <h3>VAG Huolto A. Anttonen</h3>
       <ul class="spec-list">
         <li><span>Osoite</span><span>Lisätään myöhemmin</span></li>
         <li><span>Puhelin</span><span>Lisätään myöhemmin</span></li>
-        <li><span>Sähköposti</span><span>info@tdi3.fi</span></li>
+        <li><span>Sähköposti</span><span>info@vaghuoltoanttonen.fi</span></li>
         <li><span>Aukioloajat</span><span>Ma–Pe 8–17</span></li>
       </ul>
     </div>
@@ -578,7 +651,7 @@
 </section>
 
 <footer class="wrap">
-  <span>© 2026 TDI3 Autotekniikka</span>
+  <span>© 2026 VAG Huolto A. Anttonen</span>
   <span>Kauppapaikka ja foorumi avataan myöhemmin</span>
 </footer>
 
