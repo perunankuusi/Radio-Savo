@@ -5,394 +5,329 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Apinapaja — Varaosat Monkey-mopoille</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Staatliches&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Permanent+Marker&family=Rubik+Spray+Paint&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #141217;
-    --surface: #1C1921;
-    --surface-2: #242029;
-    --ink: #EDEAE5;
-    --ink-soft: #978FA0;
-    --line: #2E2935;
-    --orange: #7D6A9B;
-    --orange-deep: #5B4C76;
-    --lime: #B6A9CC;
+    --bg:#120e1d;
+    --surface:#1a1430;
+    --surface-2:#251c45;
+    --ink:#FFF8EC;
+    --ink-soft:#BDB3D6;
+    --line:#000;
+    --pink:#FF2E93;
+    --cyan:#00E5FF;
+    --yellow:#FFE600;
+    --lime:#B6FF00;
+    --purple:#8A2BE2;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
     margin:0;
-    background:var(--bg);
     color:var(--ink);
     font-family:'Work Sans', sans-serif;
     line-height:1.55;
+    background-color:var(--bg);
+    /* tiilimuuri */
+    background-image:
+      linear-gradient(rgba(0,0,0,.38) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(0,0,0,.38) 2px, transparent 2px),
+      radial-gradient(ellipse at 20% 0%, rgba(255,46,147,.18), transparent 55%),
+      radial-gradient(ellipse at 90% 30%, rgba(0,229,255,.14), transparent 50%);
+    background-size:96px 40px, 96px 40px, auto, auto;
   }
-  h1,h2,h3,.wordmark{
-    font-family:'Staatliches', sans-serif;
-    text-transform:uppercase;
-    letter-spacing:0.015em;
+  h1,h2,h3{
+    font-family:'Permanent Marker', cursive;
     font-weight:400;
-    font-style:italic;
     margin:0;
-  }
-  /* straighten italic back where it's used for small labels/data, not display */
-  .num, .product-body h4, .hero-panel li span:last-child, .fact-list li span:last-child{
-    font-family:'Staatliches', sans-serif;
-    font-style:normal;
+    letter-spacing:.01em;
   }
   a{color:inherit;}
-  .wrap{
-    max-width:1140px;
-    margin:0 auto;
-    padding:0 28px;
+  .wrap{max-width:1140px; margin:0 auto; padding:0 28px;}
+
+  /* vaarateippi */
+  .tape{
+    height:34px;
+    background:repeating-linear-gradient(-45deg, var(--yellow) 0 22px, #000 22px 44px);
+    border-top:3px solid #000;
+    border-bottom:3px solid #000;
+    position:relative;
+    overflow:hidden;
   }
-  .stripes{
-    background:repeating-linear-gradient(135deg, var(--orange) 0 18px, var(--orange-deep) 18px 36px);
-    height:6px;
+  .tape-inner{
+    position:absolute; top:3px; left:0;
+    white-space:nowrap;
+    font-family:'Bungee', sans-serif;
+    font-size:.95rem;
+    color:#000;
+    background:var(--yellow);
+    padding:0 10px;
+    animation:run 28s linear infinite;
   }
+  @keyframes run{from{transform:translateX(100vw);}to{transform:translateX(-100%);}}
 
   /* NAV */
   header{
-    position:sticky;
-    top:0;
-    background:rgba(21,23,26,0.94);
+    position:sticky; top:0; z-index:50;
+    background:rgba(18,14,29,.95);
     backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--line);
-    z-index:50;
+    border-bottom:4px solid var(--pink);
+    box-shadow:0 4px 0 #000;
   }
-  nav.wrap{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    height:68px;
-  }
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; height:70px;}
   .wordmark{
-    font-size:1.5rem;
-    font-weight:700;
-    display:flex;
-    align-items:baseline;
-    gap:2px;
+    font-family:'Rubik Spray Paint', cursive;
+    font-size:2rem;
+    line-height:1;
+    color:var(--cyan);
+    text-shadow:3px 3px 0 var(--pink), 6px 6px 0 #000;
+    transform:rotate(-2deg);
   }
-  .chrome{
-    background:linear-gradient(180deg, #FFFFFF 0%, #B9BDC2 35%, #6E7378 50%, #D8DBDE 65%, #8A8E93 100%);
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-    color:#B9BDC2;
-  }
-  .wordmark .hi{color:var(--orange);}
-  .navlinks{
-    display:flex;
-    align-items:center;
-    gap:28px;
-    font-size:0.92rem;
-    font-weight:500;
-  }
+  .wordmark .hi{color:var(--yellow);}
+  .navlinks{display:flex; align-items:center; gap:26px; font-family:'Bungee', sans-serif; font-size:.82rem;}
   .navlinks a{
-    text-decoration:none;
-    color:var(--ink-soft);
-    padding:4px 0;
-    border-bottom:2px solid transparent;
-    transition:border-color .15s ease, color .15s ease;
+    text-decoration:none; color:var(--ink);
+    padding:4px 0; border-bottom:3px solid transparent;
+    transition:color .15s, border-color .15s;
   }
-  .navlinks a:hover, .navlinks a:focus-visible{
-    color:var(--ink);
-    border-bottom-color:var(--orange);
-  }
+  .navlinks a:hover,.navlinks a:focus-visible{color:var(--cyan); border-bottom-color:var(--pink);}
   .navlinks a.cta{
-    color:#17131C;
-    background:var(--orange);
-    padding:9px 18px;
-    border-radius:2px;
-    border-bottom:none;
-    font-weight:600;
+    color:#000; background:var(--yellow);
+    padding:9px 16px; border:3px solid #000;
+    box-shadow:4px 4px 0 var(--pink);
+    transform:rotate(-2deg);
   }
-  .navlinks a.cta:hover{background:var(--lime); color:#17131C;}
-  @media (max-width:780px){.navlinks{display:none;}}
+  .navlinks a.cta:hover{background:var(--lime); color:#000;}
+  @media (max-width:780px){.navlinks a:not(.cta){display:none;}}
 
   /* HERO */
-  .hero{padding:72px 0 64px;}
+  .hero{padding:48px 0 56px; position:relative; overflow:hidden;}
   .hero-grid{
     display:grid;
-    grid-template-columns:1.2fr 0.8fr;
-    gap:48px;
-    align-items:end;
+    grid-template-columns:1.1fr .9fr;
+    gap:32px;
+    align-items:center;
   }
   .plate{
     display:inline-block;
-    background:var(--lime);
-    color:#17131C;
-    font-family:'Oswald', sans-serif;
-    font-weight:700;
-    font-size:0.82rem;
-    letter-spacing:0.04em;
-    padding:5px 12px;
-    text-transform:uppercase;
-    border-radius:2px;
-    margin-bottom:16px;
+    background:var(--yellow);
+    color:#000;
+    font-family:'Bungee', sans-serif;
+    font-size:.8rem;
+    padding:6px 14px;
+    border:3px solid #000;
+    box-shadow:4px 4px 0 var(--cyan);
+    transform:rotate(-3deg);
+    margin-bottom:18px;
   }
   .hero h1{
-    font-size:clamp(2.6rem, 6vw, 4.4rem);
-    font-weight:700;
-    line-height:0.98;
+    font-size:clamp(2.6rem, 6.4vw, 4.8rem);
+    line-height:1.02;
+    text-transform:uppercase;
+    text-shadow:4px 4px 0 var(--purple), 8px 8px 0 #000;
   }
-  .hero h1 .accent{color:var(--orange);}
-  .hero p.lede{
-    margin-top:20px;
-    font-size:1.12rem;
-    color:var(--ink-soft);
-    max-width:48ch;
+  .hero h1 .accent{
+    color:var(--pink);
+    text-shadow:4px 4px 0 var(--yellow), 8px 8px 0 #000;
+    display:inline-block;
+    transform:rotate(-2deg);
   }
-  .hero-ctas{margin-top:32px; display:flex; gap:14px; flex-wrap:wrap;}
+  .hero p.lede{margin-top:24px; font-size:1.1rem; color:var(--ink-soft); max-width:48ch;}
+  .hero-ctas{margin-top:30px; display:flex; gap:16px; flex-wrap:wrap;}
   .btn{
     display:inline-block;
     padding:13px 24px;
-    border-radius:2px;
-    font-weight:600;
-    font-size:0.96rem;
+    font-family:'Bungee', sans-serif;
+    font-size:.9rem;
     text-decoration:none;
-    border:1px solid transparent;
+    border:3px solid #000;
     cursor:pointer;
-    font-family:'Work Sans', sans-serif;
+    transition:transform .1s, box-shadow .1s;
   }
-  .btn-primary{background:var(--orange); color:#17131C;}
-  .btn-primary:hover{background:var(--lime); color:#17131C;}
-  .btn-outline{border-color:var(--line); background:transparent; color:var(--ink);}
-  .btn-outline:hover{border-color:var(--ink);}
+  .btn-primary{background:var(--pink); color:#fff; box-shadow:5px 5px 0 #000;}
+  .btn-primary:hover{background:var(--lime); color:#000; transform:translate(-2px,-2px); box-shadow:7px 7px 0 #000;}
+  .btn-outline{background:var(--cyan); color:#000; box-shadow:5px 5px 0 #000;}
+  .btn-outline:hover{background:var(--yellow); transform:translate(-2px,-2px); box-shadow:7px 7px 0 #000;}
+
+  /* apina */
+  .monkey-wrap{position:relative; max-width:440px; margin:0 auto; width:100%;}
+  .monkey{width:100%; height:auto; display:block; filter:drop-shadow(8px 8px 0 rgba(0,0,0,.6)); animation:bob 3.2s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-8px) rotate(1deg);}}
+  .smoke{animation:smoke 3s ease-in-out infinite; transform-origin:center bottom;}
+  @keyframes smoke{0%{opacity:.2; transform:translateY(8px);}50%{opacity:.8;}100%{opacity:0; transform:translateY(-18px);}}
+  .monkey-tag{
+    position:absolute; bottom:6px; right:-4px;
+    font-family:'Permanent Marker', cursive;
+    background:#000; color:var(--lime);
+    padding:4px 12px; transform:rotate(-5deg);
+    border:3px solid var(--lime);
+    font-size:1rem;
+  }
 
   .hero-panel{
+    margin-top:44px;
     background:var(--surface);
-    border:1px solid var(--line);
-    border-radius:4px;
-    padding:26px;
+    border:4px solid #000;
+    box-shadow:8px 8px 0 var(--cyan);
+    padding:18px 24px 22px;
   }
-  .hero-panel .label{
-    font-size:0.8rem;
-    color:var(--ink-soft);
-    letter-spacing:0.04em;
+  .hero-panel .label{font-family:'Bungee', sans-serif; font-size:.8rem; color:var(--pink);}
+  .hero-panel ul{list-style:none; margin:12px 0 0; padding:0; display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .hero-panel li{display:flex; flex-direction:column; gap:2px; border-left:4px solid var(--yellow); padding-left:12px;}
+  .hero-panel li span:first-child{color:var(--ink-soft); font-size:.8rem;}
+  .hero-panel li span:last-child{font-family:'Bungee', sans-serif; font-size:.85rem; color:var(--ink);}
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .monkey-wrap{max-width:340px; order:-1;}
+    .hero-panel ul{grid-template-columns:repeat(2,1fr);}
   }
-  .hero-panel ul{
-    list-style:none;
-    margin:16px 0 0;
-    padding:0;
-    border-top:1px solid var(--line);
-  }
-  .hero-panel li{
-    display:flex;
-    justify-content:space-between;
-    padding:11px 0;
-    border-bottom:1px solid var(--line);
-    font-size:0.94rem;
-  }
-  .hero-panel li span:first-child{color:var(--ink-soft);}
-  .hero-panel li span:last-child{font-weight:600; font-family:'Oswald', sans-serif; text-transform:uppercase; font-size:0.9rem;}
-  @media (max-width:780px){.hero-grid{grid-template-columns:1fr;}}
 
   /* SECTIONS */
   section{padding:76px 0;}
-  section.surface{background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
-  .section-head{max-width:58ch; margin-bottom:42px;}
-  .section-head .plate{margin-bottom:14px;}
-  .section-head h2{font-size:2rem; font-weight:600;}
-  .section-head p{margin-top:12px; color:var(--ink-soft);}
-
-  /* CATEGORY GRID */
-  .cat-grid{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
+  section.surface{
+    background:var(--surface);
+    border-top:5px solid #000;
+    border-bottom:5px solid #000;
+    box-shadow:inset 0 6px 0 var(--purple), inset 0 -6px 0 var(--pink);
   }
+  .section-head{max-width:60ch; margin-bottom:42px;}
+  .section-head .plate{margin-bottom:14px;}
+  .section-head h2{
+    font-size:clamp(1.9rem,4vw,2.8rem);
+    text-transform:uppercase;
+    color:var(--yellow);
+    text-shadow:3px 3px 0 var(--pink), 6px 6px 0 #000;
+  }
+  .section-head p{margin-top:16px; color:var(--ink-soft);}
+
+  /* KATEGORIAT */
+  .cat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
   .cat-card{
     background:var(--bg);
-    text-decoration:none;
-    color:var(--ink);
+    border:4px solid #000;
+    box-shadow:6px 6px 0 var(--pink);
+    text-decoration:none; color:var(--ink);
     display:block;
-    transition:background .15s ease;
+    transition:transform .12s, box-shadow .12s;
   }
-  .cat-card:hover{background:var(--surface-2);}
+  .cat-card:nth-child(even){box-shadow:6px 6px 0 var(--cyan);}
+  .cat-card:nth-child(3n){box-shadow:6px 6px 0 var(--yellow);}
+  .cat-card:hover{transform:translate(-3px,-3px) rotate(-1deg); box-shadow:10px 10px 0 var(--lime);}
   .cat-thumb{
-    background:#EDE9E0;
-    height:100px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:10px;
+    background:#EDE9E0; height:100px;
+    display:flex; align-items:center; justify-content:center;
+    padding:10px; border-bottom:4px solid #000;
   }
-  .cat-thumb img{
-    max-width:100%;
-    max-height:100%;
-    object-fit:contain;
-    mix-blend-mode:multiply;
-  }
-  .cat-card .body{padding:20px 22px;}
-  .cat-card .num{
-    font-family:'Oswald', sans-serif;
-    color:var(--orange);
-    font-weight:600;
-    font-size:0.88rem;
-  }
-  .cat-card h3{
-    font-size:1.15rem;
-    font-weight:600;
-    margin-top:8px;
-    text-transform:none;
-  }
-  .cat-card p{
-    margin-top:6px;
-    font-size:0.86rem;
-    color:var(--ink-soft);
-  }
-  @media (max-width:900px){.cat-grid{grid-template-columns:repeat(2, 1fr);}}
+  .cat-thumb img{max-width:100%; max-height:100%; object-fit:contain; mix-blend-mode:multiply;}
+  .cat-card .body{padding:16px 18px 20px;}
+  .cat-card .num{font-family:'Bungee', sans-serif; color:var(--pink); font-size:.9rem;}
+  .cat-card h3{font-size:1.2rem; margin-top:6px; color:var(--ink);}
+  .cat-card p{margin-top:6px; font-size:.86rem; color:var(--ink-soft);}
+  @media (max-width:900px){.cat-grid{grid-template-columns:repeat(2,1fr);}}
   @media (max-width:560px){.cat-grid{grid-template-columns:1fr;}}
 
-  /* PRODUCT GRID */
+  /* TUOTTEET */
   .badge{
     display:inline-block;
-    background:var(--orange);
-    color:#17131C;
-    font-weight:700;
-    font-size:0.74rem;
-    letter-spacing:0.03em;
-    text-transform:uppercase;
-    padding:4px 10px;
-    border-radius:2px;
-    margin-bottom:14px;
+    background:var(--lime); color:#000;
+    font-family:'Bungee', sans-serif; font-size:.78rem;
+    padding:5px 12px; border:3px solid #000;
+    box-shadow:4px 4px 0 var(--pink);
+    transform:rotate(2deg);
+    margin-bottom:16px;
   }
-  .product-grid{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:20px;
-  }
+  .product-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
   .product-card{
     background:var(--surface);
-    border:1px solid var(--line);
-    border-radius:4px;
-    overflow:hidden;
+    border:4px solid #000;
+    box-shadow:7px 7px 0 var(--cyan);
+    transition:transform .12s;
   }
+  .product-card:nth-child(odd){transform:rotate(-.7deg);}
+  .product-card:nth-child(even){transform:rotate(.7deg); box-shadow:7px 7px 0 var(--pink);}
+  .product-card:hover{transform:rotate(0) translateY(-4px);}
   .product-thumb{
-    height:150px;
-    background:#EDE9E0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:14px;
+    height:150px; background:#EDE9E0;
+    display:flex; align-items:center; justify-content:center;
+    padding:14px; border-bottom:4px solid #000;
   }
-  .product-thumb img{
-    max-width:100%;
-    max-height:100%;
-    object-fit:contain;
-    mix-blend-mode:multiply;
-  }
+  .product-thumb img{max-width:100%; max-height:100%; object-fit:contain; mix-blend-mode:multiply;}
   .product-body{padding:18px;}
-  .product-body h4{
-    font-family:'Oswald', sans-serif;
-    font-size:1.1rem;
-    font-weight:600;
-    text-transform:none;
-  }
-  .product-meta{
-    margin-top:6px;
-    font-size:0.85rem;
-    color:var(--ink-soft);
-  }
-  .product-price{
-    margin-top:12px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-  }
-  .product-price .price{font-weight:700; color:var(--orange); font-family:'Staatliches', sans-serif; font-style:normal;}
-  .mini-link{
-    font-size:0.84rem;
-    color:var(--lime);
-    text-decoration:none;
-    font-weight:600;
-  }
-  .mini-link:hover{text-decoration:underline;}
-  @media (max-width:900px){.product-grid{grid-template-columns:repeat(2, 1fr);}}
+  .product-body h4{font-family:'Permanent Marker', cursive; font-weight:400; font-size:1.2rem; margin:0; color:var(--yellow);}
+  .product-meta{margin-top:6px; font-size:.85rem; color:var(--ink-soft);}
+  .product-price{margin-top:14px; display:flex; justify-content:space-between; align-items:center;}
+  .product-price .price{font-family:'Bungee', sans-serif; font-size:.85rem; color:#000; background:var(--lime); padding:3px 9px; border:2px solid #000;}
+  .mini-link{font-family:'Bungee', sans-serif; font-size:.75rem; color:var(--cyan); text-decoration:none;}
+  .mini-link:hover{color:var(--pink);}
+  @media (max-width:900px){.product-grid{grid-template-columns:repeat(2,1fr);}}
   @media (max-width:560px){.product-grid{grid-template-columns:1fr;}}
 
-  /* ABOUT */
-  .about-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:56px;
-    align-items:start;
-  }
+  /* TIETOA */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
   .about-grid p{color:var(--ink-soft); margin-top:14px;}
-  .about-grid p:first-child{margin-top:0;}
-  .fact-list{list-style:none; padding:0; margin:0; border-top:1px solid var(--line);}
+  .fact-list{list-style:none; padding:0; margin:0;}
   .fact-list li{
-    display:flex;
-    justify-content:space-between;
-    padding:13px 0;
-    border-bottom:1px solid var(--line);
-    font-size:0.94rem;
+    display:flex; justify-content:space-between; gap:16px;
+    padding:13px 16px; margin-bottom:10px;
+    background:var(--bg);
+    border:3px solid #000;
+    box-shadow:4px 4px 0 var(--purple);
+    font-size:.94rem;
   }
   .fact-list li span:first-child{color:var(--ink-soft);}
-  .fact-list li span:last-child{font-weight:600; font-family:'Oswald', sans-serif; text-transform:uppercase; font-size:0.88rem;}
+  .fact-list li span:last-child{font-family:'Bungee', sans-serif; font-size:.8rem; color:var(--yellow); text-align:right;}
   @media (max-width:780px){.about-grid{grid-template-columns:1fr;}}
 
-  /* USED PARTS */
-  .used-row{
-    display:flex;
-    justify-content:space-between;
-    gap:20px;
-    padding:16px 0;
-    border-bottom:1px solid var(--line);
-  }
-  .used-list{border-top:1px solid var(--line);}
-  .used-row .name{font-weight:600;}
-  .used-row .meta{color:var(--ink-soft); font-size:0.88rem; margin-top:2px;}
+  /* KÄYTETYT */
+  .used-list{border:4px solid #000; background:var(--surface); box-shadow:8px 8px 0 var(--lime);}
+  .used-row{display:flex; justify-content:space-between; gap:20px; padding:16px 20px; border-bottom:3px dashed rgba(255,255,255,.2);}
+  .used-row:last-child{border-bottom:none;}
+  .used-row .name{font-weight:600; color:var(--yellow);}
+  .used-row .meta{color:var(--ink-soft); font-size:.88rem; margin-top:2px;}
   .used-row .status{
-    white-space:nowrap;
-    align-self:center;
-    font-size:0.82rem;
-    font-weight:600;
-    color:var(--lime);
-    text-transform:uppercase;
+    white-space:nowrap; align-self:center;
+    font-family:'Bungee', sans-serif; font-size:.78rem;
+    background:var(--pink); color:#fff;
+    padding:5px 12px; border:3px solid #000; transform:rotate(-3deg);
   }
 
-  /* CONTACT */
+  /* YHTEYS */
   .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px;}
   .field{margin-bottom:18px;}
-  .field label{display:block; font-size:0.86rem; font-weight:600; margin-bottom:6px; color:var(--ink-soft);}
-  .field input, .field select, .field textarea{
-    width:100%;
-    padding:12px 14px;
-    border:1px solid var(--line);
-    border-radius:2px;
-    font-family:'Work Sans', sans-serif;
-    font-size:0.95rem;
-    background:var(--surface);
-    color:var(--ink);
+  .field label{display:block; font-family:'Bungee', sans-serif; font-size:.78rem; margin-bottom:6px; color:var(--cyan);}
+  .field input,.field select,.field textarea{
+    width:100%; padding:12px 14px;
+    border:3px solid #000; border-radius:0;
+    font-family:'Work Sans', sans-serif; font-size:.95rem;
+    background:var(--ink); color:#000;
+    box-shadow:4px 4px 0 var(--purple);
   }
-  .field input:focus, .field select:focus, .field textarea:focus{
-    outline:2px solid var(--orange);
-    outline-offset:1px;
-    border-color:var(--orange);
+  .field input:focus,.field select:focus,.field textarea:focus{
+    outline:3px solid var(--yellow); outline-offset:2px;
   }
-  .contact-info h3{font-size:1.25rem; font-weight:600;}
+  .contact-info h3{font-size:1.6rem; color:var(--pink); text-shadow:3px 3px 0 #000; margin-bottom:16px;}
 
   footer{
     padding:34px 0;
-    border-top:1px solid var(--line);
-    color:var(--ink-soft);
-    font-size:0.86rem;
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:10px;
+    border-top:4px solid #000;
+    color:var(--ink-soft); font-size:.86rem;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
   }
 
-  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+  @media (max-width:780px){.contact-grid{grid-template-columns:1fr; gap:36px;}}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .monkey,.smoke,.tape-inner{animation:none;}
+    .tape-inner{position:static;}
+  }
 </style>
 </head>
 <body>
 
-<div class="stripes"></div>
+<div class="tape" aria-hidden="true">
+  <div class="tape-inner">★ APINAPAJA ★ VAIN MONKEYLLE ★ HONDA ★ SKYTEAM ★ KLOONIT ★ OSAT JOTKA SOPII OIKEASTI ★ APINAPAJA ★ VAIN MONKEYLLE ★</div>
+</div>
 
 <header>
   <nav class="wrap">
@@ -407,16 +342,116 @@
 </header>
 
 <section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="plate">Vain Monkeylle</span>
-      <h1>Osat jotka<br>sopii <span class="chrome">oikeasti</span>.</h1>
-      <p class="lede">Varaosia Honda Monkeylle, Skyteam-kopioille ja muille klooniversioille. Ei sekalaista mopovalikoimaa — pelkästään Monkeyt, ja tiedämme mikä niihin sopii.</p>
-      <div class="hero-ctas">
-        <a href="#osat" class="btn btn-primary">Selaa osia</a>
-        <a href="#yhteys" class="btn btn-outline">Kysy saatavuus</a>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="plate">Vain Monkeylle</span>
+        <h1>Osat jotka<br>sopii <span class="accent">oikeasti</span>!</h1>
+        <p class="lede">Varaosia Honda Monkeylle, Skyteam-kopioille ja muille klooniversioille. Ei sekalaista mopovalikoimaa — pelkästään Monkeyt, ja tiedämme mikä niihin sopii.</p>
+        <div class="hero-ctas">
+          <a href="#osat" class="btn btn-primary">Selaa osia</a>
+          <a href="#yhteys" class="btn btn-outline">Kysy saatavuus</a>
+        </div>
+      </div>
+
+      <div class="monkey-wrap">
+        <svg class="monkey" viewBox="0 0 420 420" role="img" aria-label="Graffiti-tyylinen apina, jolla on baskeri, aurinkolasit ja tupakka suussa">
+          <defs>
+            <linearGradient id="shade" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#2a0a4a"/>
+              <stop offset="1" stop-color="#0b0b1a"/>
+            </linearGradient>
+          </defs>
+
+          <!-- taustan räjähdys -->
+          <polygon points="210,8 238,70 300,28 296,98 372,92 332,150 405,190 335,218 392,282 316,288 322,368 252,332 210,408 168,332 98,368 104,288 28,282 85,218 15,190 88,150 48,92 124,98 120,28 182,70" fill="#FFE600" stroke="#000" stroke-width="6" stroke-linejoin="round"/>
+          <polygon points="210,48 230,96 276,66 272,116 330,116 298,158 352,190 298,210 336,262 280,262 282,320 238,296 210,350 182,296 138,320 140,262 84,262 122,210 68,190 122,158 90,116 148,116 144,66 190,96" fill="#FF2E93" opacity=".9"/>
+
+          <!-- huppari / vartalo -->
+          <path d="M62 420 C62 336 124 296 210 296 C296 296 358 336 358 420 Z" fill="#00E5FF" stroke="#000" stroke-width="8" stroke-linejoin="round"/>
+          <path d="M165 300 Q210 336 255 300" fill="none" stroke="#000" stroke-width="6"/>
+          <line x1="190" y1="322" x2="186" y2="372" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+          <line x1="230" y1="322" x2="234" y2="372" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+          <!-- graffiti-teksti huppariin -->
+          <text x="210" y="408" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="30" fill="#FF2E93" stroke="#000" stroke-width="1.5">MONKEY</text>
+
+          <!-- spraypullo -->
+          <g transform="rotate(-18 66 330)">
+            <rect x="40" y="290" width="46" height="96" rx="8" fill="#B6FF00" stroke="#000" stroke-width="6"/>
+            <rect x="48" y="270" width="30" height="24" rx="4" fill="#fff" stroke="#000" stroke-width="5"/>
+            <rect x="56" y="256" width="14" height="16" fill="#FF2E93" stroke="#000" stroke-width="4"/>
+            <rect x="46" y="318" width="34" height="26" fill="#fff" stroke="#000" stroke-width="3"/>
+          </g>
+          <circle cx="40" cy="236" r="5" fill="#FF2E93"/>
+          <circle cx="26" cy="222" r="3.5" fill="#FF2E93"/>
+          <circle cx="48" cy="216" r="3" fill="#00E5FF"/>
+
+          <!-- korvat -->
+          <circle cx="92" cy="206" r="36" fill="#8B5A2B" stroke="#000" stroke-width="8"/>
+          <circle cx="92" cy="206" r="18" fill="#E8B98A"/>
+          <circle cx="328" cy="206" r="36" fill="#8B5A2B" stroke="#000" stroke-width="8"/>
+          <circle cx="328" cy="206" r="18" fill="#E8B98A"/>
+
+          <!-- pää -->
+          <ellipse cx="210" cy="196" rx="118" ry="106" fill="#8B5A2B" stroke="#000" stroke-width="8"/>
+          <!-- kasvot -->
+          <circle cx="170" cy="188" r="50" fill="#E8B98A"/>
+          <circle cx="250" cy="188" r="50" fill="#E8B98A"/>
+          <ellipse cx="210" cy="244" rx="82" ry="58" fill="#E8B98A"/>
+          <!-- uloimmat ääriviivat kasvoille -->
+          <path d="M122 200 C118 150 160 140 210 164 C260 140 302 150 298 200 C306 262 262 302 210 302 C158 302 114 262 122 200 Z" fill="none" stroke="#000" stroke-width="5" opacity=".0"/>
+
+          <!-- aurinkolasit -->
+          <path d="M92 176 L128 170" stroke="#000" stroke-width="8" stroke-linecap="round"/>
+          <path d="M328 176 L292 170" stroke="#000" stroke-width="8" stroke-linecap="round"/>
+          <rect x="120" y="164" width="80" height="52" rx="18" fill="url(#shade)" stroke="#000" stroke-width="7"/>
+          <rect x="220" y="164" width="80" height="52" rx="18" fill="url(#shade)" stroke="#000" stroke-width="7"/>
+          <rect x="198" y="176" width="24" height="9" fill="#000"/>
+          <polygon points="132,172 150,172 134,208 124,208" fill="#FF2E93" opacity=".9"/>
+          <polygon points="156,172 164,172 148,208 140,208" fill="#00E5FF" opacity=".9"/>
+          <polygon points="232,172 250,172 234,208 224,208" fill="#FF2E93" opacity=".9"/>
+          <polygon points="256,172 264,172 248,208 240,208" fill="#00E5FF" opacity=".9"/>
+
+          <!-- nenä -->
+          <ellipse cx="198" cy="238" rx="7" ry="9" fill="#4a2a10"/>
+          <ellipse cx="222" cy="238" rx="7" ry="9" fill="#4a2a10"/>
+
+          <!-- hymy (vino virne) -->
+          <path d="M150 264 Q196 296 258 262" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <path d="M150 264 L142 256" stroke="#000" stroke-width="5" stroke-linecap="round"/>
+          <!-- hampaat -->
+          <path d="M176 278 L190 282 L190 272 Z" fill="#fff" stroke="#000" stroke-width="2"/>
+
+          <!-- tupakka -->
+          <g transform="rotate(-14 236 272)">
+            <rect x="234" y="264" width="86" height="12" rx="3" fill="#fff" stroke="#000" stroke-width="4"/>
+            <rect x="234" y="264" width="24" height="12" rx="3" fill="#FF9A3C" stroke="#000" stroke-width="4"/>
+            <rect x="316" y="263" width="9" height="14" rx="3" fill="#FF3B30" stroke="#000" stroke-width="3"/>
+          </g>
+          <!-- savu -->
+          <g fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".85">
+            <path class="smoke" d="M334 244 C318 226 350 214 334 196 C320 180 346 168 334 150"/>
+            <path class="smoke" style="animation-delay:1.2s" d="M350 248 C366 230 338 220 352 202"/>
+          </g>
+
+          <!-- baskeri -->
+          <g transform="rotate(-12 205 106)">
+            <ellipse cx="205" cy="108" rx="116" ry="44" fill="#FF2E93" stroke="#000" stroke-width="8"/>
+            <path d="M118 124 C140 150 270 150 292 124" fill="none" stroke="#000" stroke-width="6"/>
+            <ellipse cx="170" cy="92" rx="34" ry="10" fill="#fff" opacity=".35"/>
+            <path d="M205 66 L211 44" stroke="#000" stroke-width="9" stroke-linecap="round"/>
+            <circle cx="236" cy="104" r="7" fill="#FFE600" stroke="#000" stroke-width="2"/>
+            <circle cx="262" cy="118" r="5" fill="#00E5FF" stroke="#000" stroke-width="2"/>
+            <circle cx="150" cy="116" r="5" fill="#B6FF00" stroke="#000" stroke-width="2"/>
+          </g>
+
+          <!-- spray-valutus -->
+          <path d="M372 330 v26 M388 340 v36" stroke="#00E5FF" stroke-width="7" stroke-linecap="round"/>
+        </svg>
+        <div class="monkey-tag">APINAPAJA 1985</div>
       </div>
     </div>
+
     <div class="hero-panel">
       <div class="label">KATTAVUUS</div>
       <ul>
@@ -439,66 +474,34 @@
     <div class="cat-grid">
       <a class="cat-card" href="#yhteys">
         <div class="cat-thumb"><img src="etuhaarukka-ohjaustanko.jpg" alt="Etuhaarukka ja ohjaustangon osat"></div>
-        <div class="body">
-          <div class="num">01</div>
-          <h3>Etukeulat &amp; jousitus</h3>
-          <p>Keulaputket, iskarit, laakerit</p>
-        </div>
+        <div class="body"><div class="num">01</div><h3>Etukeulat &amp; jousitus</h3><p>Keulaputket, iskarit, laakerit</p></div>
       </a>
       <a class="cat-card" href="#yhteys">
         <div class="cat-thumb"><img src="jarrukahva-palat.jpg" alt="Jarrukahva ja jarrupalat"></div>
-        <div class="body">
-          <div class="num">02</div>
-          <h3>Jarrut</h3>
-          <p>Levyjarrut, palat, letkut</p>
-        </div>
+        <div class="body"><div class="num">02</div><h3>Jarrut</h3><p>Levyjarrut, palat, letkut</p></div>
       </a>
       <a class="cat-card" href="#yhteys">
         <div class="cat-thumb"><img src="moottori.jpg" alt="Moottori"></div>
-        <div class="body">
-          <div class="num">03</div>
-          <h3>Moottorit &amp; osat</h3>
-          <p>Sylinterit, männät, kytkimet</p>
-        </div>
+        <div class="body"><div class="num">03</div><h3>Moottorit &amp; osat</h3><p>Sylinterit, männät, kytkimet</p></div>
       </a>
       <a class="cat-card" href="#yhteys">
         <div class="cat-thumb"><img src="pakoputket.jpg" alt="Pakoputkisarja"></div>
-        <div class="body">
-          <div class="num">04</div>
-          <h3>Pakoputket</h3>
-          <p>Täyssarjat ja äänenvaimentimet</p>
-        </div>
+        <div class="body"><div class="num">04</div><h3>Pakoputket</h3><p>Täyssarjat ja äänenvaimentimet</p></div>
       </a>
       <a class="cat-card" href="#yhteys">
         <div class="cat-thumb"><img src="lokasuojat.jpg" alt="Lokasuojat"></div>
-        <div class="body">
-          <div class="num">05</div>
-          <h3>Muovit &amp; korit</h3>
-          <p>Tankit, lokasuojat, istuimet</p>
-        </div>
+        <div class="body"><div class="num">05</div><h3>Muovit &amp; korit</h3><p>Tankit, lokasuojat, istuimet</p></div>
       </a>
       <a class="cat-card" href="#yhteys">
         <div class="cat-thumb"><img src="rengas-napa.jpg" alt="Rengas ja napa"></div>
-        <div class="body">
-          <div class="num">06</div>
-          <h3>Renkaat &amp; vanteet</h3>
-          <p>Komplettipyörät ja yksittäiset</p>
-        </div>
+        <div class="body"><div class="num">06</div><h3>Renkaat &amp; vanteet</h3><p>Komplettipyörät ja yksittäiset</p></div>
       </a>
       <a class="cat-card" href="#yhteys">
         <div class="cat-thumb"><img src="kahvat-kytkimet.jpg" alt="Kahvat ja kytkimet"></div>
-        <div class="body">
-          <div class="num">07</div>
-          <h3>Pienosat &amp; tarvikkeet</h3>
-          <p>Ruuvit, kaapelit, pikkutarvikkeet</p>
-        </div>
+        <div class="body"><div class="num">07</div><h3>Pienosat &amp; tarvikkeet</h3><p>Ruuvit, kaapelit, pikkutarvikkeet</p></div>
       </a>
       <a class="cat-card" href="#kaytetyt">
-        <div class="body">
-          <div class="num">08</div>
-          <h3>Käytetyt osat</h3>
-          <p>Puretuista mopoista</p>
-        </div>
+        <div class="body"><div class="num">08</div><h3>Käytetyt osat</h3><p>Puretuista mopoista</p></div>
       </a>
     </div>
   </div>
@@ -576,7 +579,7 @@
   <div class="wrap about-grid">
     <div>
       <span class="plate">Tietoa</span>
-      <h2 style="font-size:2rem; font-weight:600; margin-top:10px;">Miksi pelkästään Monkey?</h2>
+      <h2 style="font-size:2.2rem; text-transform:uppercase; color:var(--yellow); text-shadow:3px 3px 0 var(--pink), 6px 6px 0 #000;">Miksi pelkästään Monkey?</h2>
       <p>Apinapaja syntyi ihan tavallisesta ongelmasta: oman Skyteam-mankelin osia oli työlästä löytää järkevästä paikasta — moni kauppa myy kaikkea sekaisin, eikä kukaan tiedä mikä oikeasti sopii mihinkin kloonimalliin.</p>
       <p>Siksi valikoima on tarkoituksella kapea. Kun myymme vain Monkeylle ja sen kopioille sopivia osia, tiedämme täsmälleen mikä sopii mihinkin runkoon ja moottoriin — emme arvaile.</p>
     </div>
@@ -592,30 +595,21 @@
 <section id="kaytetyt">
   <div class="wrap">
     <span class="plate">Käytetyt osat</span>
-    <div class="section-head" style="margin-bottom:10px;">
+    <div class="section-head" style="margin-bottom:26px;">
       <h2>Puretuista mopoista</h2>
       <p>Käytettyjen osien valikoima vaihtelee sen mukaan, mitä on juuri purettu. Kysy rohkeasti, vaikka listalla ei näkyisi juuri sitä mitä etsit — uutta tulee jatkuvasti.</p>
     </div>
     <div class="used-list">
       <div class="used-row">
-        <div>
-          <div class="name">Jarrusatula, etu</div>
-          <div class="meta">Irrotettu puretusta kloonimopedista</div>
-        </div>
+        <div><div class="name">Jarrusatula, etu</div><div class="meta">Irrotettu puretusta kloonimopedista</div></div>
         <div class="status">Kysy</div>
       </div>
       <div class="used-row">
-        <div>
-          <div class="name">Mittaristo, analoginen</div>
-          <div class="meta">Honda Monkey -tyylinen, toimiva</div>
-        </div>
+        <div><div class="name">Mittaristo, analoginen</div><div class="meta">Honda Monkey -tyylinen, toimiva</div></div>
         <div class="status">Kysy</div>
       </div>
       <div class="used-row">
-        <div>
-          <div class="name">Takavalosarja</div>
-          <div class="meta">Skyteam-yhteensopiva</div>
-        </div>
+        <div><div class="name">Takavalosarja</div><div class="meta">Skyteam-yhteensopiva</div></div>
         <div class="status">Kysy</div>
       </div>
     </div>
