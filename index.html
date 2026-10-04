@@ -206,13 +206,27 @@
   }
   .cat-card{
     background:var(--bg);
-    padding:26px 22px;
     text-decoration:none;
     color:var(--ink);
     display:block;
     transition:background .15s ease;
   }
   .cat-card:hover{background:var(--surface-2);}
+  .cat-thumb{
+    background:#EDE9E0;
+    height:100px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px;
+  }
+  .cat-thumb img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    mix-blend-mode:multiply;
+  }
+  .cat-card .body{padding:20px 22px;}
   .cat-card .num{
     font-family:'Oswald', sans-serif;
     color:var(--orange);
@@ -258,15 +272,18 @@
     overflow:hidden;
   }
   .product-thumb{
-    height:140px;
-    background:repeating-linear-gradient(45deg, var(--surface-2) 0 10px, var(--surface) 10px 20px);
+    height:150px;
+    background:#EDE9E0;
     display:flex;
     align-items:center;
     justify-content:center;
-    color:var(--ink-soft);
-    font-family:'Oswald', sans-serif;
-    font-size:0.82rem;
-    letter-spacing:0.03em;
+    padding:14px;
+  }
+  .product-thumb img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    mix-blend-mode:multiply;
   }
   .product-body{padding:18px;}
   .product-body h4{
@@ -421,44 +438,67 @@
     </div>
     <div class="cat-grid">
       <a class="cat-card" href="#yhteys">
-        <div class="num">01</div>
-        <h3>Etukeulat &amp; jousitus</h3>
-        <p>Keulaputket, iskarit, laakerit</p>
+        <div class="cat-thumb"><img src="images/etuhaarukka-ohjaustanko.jpg" alt="Etuhaarukka ja ohjaustangon osat"></div>
+        <div class="body">
+          <div class="num">01</div>
+          <h3>Etukeulat &amp; jousitus</h3>
+          <p>Keulaputket, iskarit, laakerit</p>
+        </div>
       </a>
       <a class="cat-card" href="#yhteys">
-        <div class="num">02</div>
-        <h3>Jarrut</h3>
-        <p>Levyjarrut, palat, letkut</p>
+        <div class="cat-thumb"><img src="images/jarrukahva-palat.jpg" alt="Jarrukahva ja jarrupalat"></div>
+        <div class="body">
+          <div class="num">02</div>
+          <h3>Jarrut</h3>
+          <p>Levyjarrut, palat, letkut</p>
+        </div>
       </a>
       <a class="cat-card" href="#yhteys">
-        <div class="num">03</div>
-        <h3>Moottorit &amp; osat</h3>
-        <p>Sylinterit, männät, kytkimet</p>
+        <div class="cat-thumb"><img src="images/moottori.jpg" alt="Moottori"></div>
+        <div class="body">
+          <div class="num">03</div>
+          <h3>Moottorit &amp; osat</h3>
+          <p>Sylinterit, männät, kytkimet</p>
+        </div>
       </a>
       <a class="cat-card" href="#yhteys">
-        <div class="num">04</div>
-        <h3>Pakoputket</h3>
-        <p>Täyssarjat ja äänenvaimentimet</p>
+        <div class="cat-thumb"><img src="images/pakoputket.jpg" alt="Pakoputkisarja"></div>
+        <div class="body">
+          <div class="num">04</div>
+          <h3>Pakoputket</h3>
+          <p>Täyssarjat ja äänenvaimentimet</p>
+        </div>
       </a>
       <a class="cat-card" href="#yhteys">
-        <div class="num">05</div>
-        <h3>Muovit &amp; korit</h3>
-        <p>Tankit, lokasuojat, istuimet</p>
+        <div class="cat-thumb"><img src="images/lokasuojat.jpg" alt="Lokasuojat"></div>
+        <div class="body">
+          <div class="num">05</div>
+          <h3>Muovit &amp; korit</h3>
+          <p>Tankit, lokasuojat, istuimet</p>
+        </div>
       </a>
       <a class="cat-card" href="#yhteys">
-        <div class="num">06</div>
-        <h3>Renkaat &amp; vanteet</h3>
-        <p>Komplettipyörät ja yksittäiset</p>
+        <div class="cat-thumb"><img src="images/rengas-napa.jpg" alt="Rengas ja napa"></div>
+        <div class="body">
+          <div class="num">06</div>
+          <h3>Renkaat &amp; vanteet</h3>
+          <p>Komplettipyörät ja yksittäiset</p>
+        </div>
       </a>
       <a class="cat-card" href="#yhteys">
-        <div class="num">07</div>
-        <h3>Pienosat &amp; tarvikkeet</h3>
-        <p>Ruuvit, kaapelit, pikkutarvikkeet</p>
+        <div class="cat-thumb"><img src="images/kahvat-kytkimet.jpg" alt="Kahvat ja kytkimet"></div>
+        <div class="body">
+          <div class="num">07</div>
+          <h3>Pienosat &amp; tarvikkeet</h3>
+          <p>Ruuvit, kaapelit, pikkutarvikkeet</p>
+        </div>
       </a>
       <a class="cat-card" href="#kaytetyt">
-        <div class="num">08</div>
-        <h3>Käytetyt osat</h3>
-        <p>Puretuista mopoista</p>
+        <div class="body">
+          <div class="num">08</div>
+          <h3>Käytetyt osat</h3>
+          <p>Puretuista mopoista</p>
+        </div>
       </a>
     </div>
   </div>
@@ -466,14 +506,14 @@
 
 <section>
   <div class="wrap">
-    <span class="badge">Esimerkki</span>
+    <span class="badge">Valikoimasta</span>
     <div class="section-head" style="margin-bottom:34px;">
-      <h2>Tällaisia osia on tulossa</h2>
-      <p>Valikoima on vielä rakenteilla. Alla muutama esimerkki siitä, miltä tuotekortit tulevat näyttämään kun varasto on kuvattu ja hinnoiteltu.</p>
+      <h2>Tällaisia osia löytyy</h2>
+      <p>Hinnat ja tarkat varastosaldot tulevat vielä — kysy toistaiseksi saatavuutta suoraan.</p>
     </div>
     <div class="product-grid">
       <div class="product-card">
-        <div class="product-thumb">KUVA TULOSSA</div>
+        <div class="product-thumb"><img src="images/keula-levyjarru.jpg" alt="Etukeula 550mm levyjarrulla"></div>
         <div class="product-body">
           <h4>Etukeula 550mm, levyjarrulla</h4>
           <div class="product-meta">Skyteam / Honda Monkey -yhteensopiva</div>
@@ -481,7 +521,7 @@
         </div>
       </div>
       <div class="product-card">
-        <div class="product-thumb">KUVA TULOSSA</div>
+        <div class="product-thumb"><img src="images/pakoputket.jpg" alt="Pakoputkisarja"></div>
         <div class="product-body">
           <h4>Pakoputkisarja, täyssarja</h4>
           <div class="product-meta">Kloonimoottoreihin, universaali kiinnitys</div>
@@ -489,10 +529,42 @@
         </div>
       </div>
       <div class="product-card">
-        <div class="product-thumb">KUVA TULOSSA</div>
+        <div class="product-thumb"><img src="images/iskarit-haarukka.jpg" alt="Takaiskarit ja heiluri"></div>
         <div class="product-body">
-          <h4>Etulevyjarrusatula + palat</h4>
-          <div class="product-meta">Sopii 550mm-keulaan</div>
+          <h4>Takaiskarisarja, siniset jouset</h4>
+          <div class="product-meta">Heiluri ja iskarit pakettina</div>
+          <div class="product-price"><span class="price">Kysy hintaa</span><a class="mini-link" href="#yhteys">Kysy &rarr;</a></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-thumb"><img src="images/istuinsarja.jpg" alt="Istuinsarja"></div>
+        <div class="product-body">
+          <h4>Istuinsarja, etu ja taka</h4>
+          <div class="product-meta">Honda-tyylinen, mustaa nahkaimitaatiota</div>
+          <div class="product-price"><span class="price">Kysy hintaa</span><a class="mini-link" href="#yhteys">Kysy &rarr;</a></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-thumb"><img src="images/jalkatapit-sivutuki.jpg" alt="Jalkatapit ja sivutuki"></div>
+        <div class="product-body">
+          <h4>Jalkatapit + sivutuki</h4>
+          <div class="product-meta">Säädettävät jalkatapit, pari</div>
+          <div class="product-price"><span class="price">Kysy hintaa</span><a class="mini-link" href="#yhteys">Kysy &rarr;</a></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-thumb"><img src="images/valot-mittaristo.jpg" alt="Ajovalo ja mittaristo"></div>
+        <div class="product-body">
+          <h4>Ajovalosarja + mittaristo</h4>
+          <div class="product-meta">Kromikupu, polttimo ja nopeusmittari</div>
+          <div class="product-price"><span class="price">Kysy hintaa</span><a class="mini-link" href="#yhteys">Kysy &rarr;</a></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-thumb"><img src="images/moottori.jpg" alt="Täydellinen moottori"></div>
+        <div class="product-body">
+          <h4>Täydellinen moottori</h4>
+          <div class="product-meta">Kloonimoottori, asennusvalmis</div>
           <div class="product-price"><span class="price">Kysy hintaa</span><a class="mini-link" href="#yhteys">Kysy &rarr;</a></div>
         </div>
       </div>
