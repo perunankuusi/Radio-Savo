@@ -13,6 +13,9 @@
    - tiedot:  lista pareista [otsikko, arvo], näkyy tuotesivulla taulukkona.
    - tila:    esim. "Varastossa", "Tilattavissa" tai "Myyty". Tyhjä = ei näytetä.
 
+   - kategoriat: mihin kategorioihin tuote kuuluu (katso KATEGORIAT alempana).
+              Tuote voi kuulua useampaan, esim. ["jarrut", "etukeulat"].
+
    UUSI TUOTE: kopioi yksi { ... } -lohko pilkkuineen, vaihda id (ei välilyöntejä
    eikä ääkkösiä) ja muut tiedot. Tuotteet näkyvät sivulla tässä järjestyksessä.
    Muista pilkku jokaisen lohkon } jälkeen (paitsi viimeisen).
@@ -21,6 +24,7 @@
 var TUOTTEET = [
   {
     id: "etukeula",
+    kategoriat: ["etukeulat", "jarrut"],
     nimi: "Etukeula 550mm, levyjarrulla",
     lyhyt: "Skyteam / Honda Monkey -yhteensopiva",
     hinta: "",
@@ -35,6 +39,7 @@ var TUOTTEET = [
   },
   {
     id: "pakoputkisarja",
+    kategoriat: ["pakoputket"],
     nimi: "Pakoputkisarja, täyssarja",
     lyhyt: "Kloonimoottoreihin, universaali kiinnitys",
     hinta: "",
@@ -48,6 +53,7 @@ var TUOTTEET = [
   },
   {
     id: "takaiskarit",
+    kategoriat: ["etukeulat"],
     nimi: "Takaiskarisarja, siniset jouset",
     lyhyt: "Heiluri ja iskarit pakettina",
     hinta: "",
@@ -61,6 +67,7 @@ var TUOTTEET = [
   },
   {
     id: "istuinsarja",
+    kategoriat: ["muovit"],
     nimi: "Istuinsarja, etu ja taka",
     lyhyt: "Honda-tyylinen, mustaa nahkaimitaatiota",
     hinta: "",
@@ -75,6 +82,7 @@ var TUOTTEET = [
   },
   {
     id: "jalkatapit-sivutuki",
+    kategoriat: ["pienosat"],
     nimi: "Jalkatapit + sivutuki",
     lyhyt: "Säädettävät jalkatapit, pari",
     hinta: "",
@@ -88,6 +96,7 @@ var TUOTTEET = [
   },
   {
     id: "ajovalosarja-mittaristo",
+    kategoriat: ["pienosat"],
     nimi: "Ajovalosarja + mittaristo",
     lyhyt: "Kromikupu, polttimo ja nopeusmittari",
     hinta: "",
@@ -100,6 +109,7 @@ var TUOTTEET = [
   },
   {
     id: "moottori",
+    kategoriat: ["moottorit"],
     nimi: "Täydellinen moottori",
     lyhyt: "Kloonimoottori, asennusvalmis",
     hinta: "",
@@ -110,5 +120,83 @@ var TUOTTEET = [
       ["Tyyppi", "Kloonimoottori"],
       ["Kunto", "Asennusvalmis"]
     ]
+  }
+];
+
+
+/* ==========================================================
+   KATEGORIAT
+   Jokainen kategoria saa oman sivunsa (kategoria.html?id=...), jossa
+   näkyvät kaikki siihen kuuluvat tuotteet.
+   - id:      sama teksti, jota käytät tuotteen kategoriat-listassa
+   - kuva:    kategoriakortin kuva (voi olla tyhjä "")
+   - linkki:  jos täytetty, kortti vie tähän osoitteeseen eikä omalle sivulleen
+   ========================================================== */
+
+var KATEGORIAT = [
+  {
+    id: "etukeulat",
+    numero: "01",
+    nimi: "Etukeulat & jousitus",
+    lyhyt: "Keulaputket, iskarit, laakerit",
+    kuvaus: "Etukeulat, takaiskarit, laakerit ja muut jousitukseen kuuluvat osat.",
+    kuva: "kuvat/etukeula-osat.jpg"
+  },
+  {
+    id: "jarrut",
+    numero: "02",
+    nimi: "Jarrut",
+    lyhyt: "Levyjarrut, palat, letkut",
+    kuvaus: "Levyjarrut, jarrupalat, jarrukahvat ja letkut.",
+    kuva: "kuvat/jarrukahva-palat.jpg"
+  },
+  {
+    id: "moottorit",
+    numero: "03",
+    nimi: "Moottorit & osat",
+    lyhyt: "Sylinterit, männät, kytkimet",
+    kuvaus: "Kokonaiset moottorit sekä sylinterit, männät, kytkimet ja muut moottorin osat.",
+    kuva: "kuvat/moottori.jpg"
+  },
+  {
+    id: "pakoputket",
+    numero: "04",
+    nimi: "Pakoputket",
+    lyhyt: "Täyssarjat ja äänenvaimentimet",
+    kuvaus: "Pakoputkien täyssarjat ja äänenvaimentimet.",
+    kuva: "kuvat/pakoputket.jpg"
+  },
+  {
+    id: "muovit",
+    numero: "05",
+    nimi: "Muovit & korit",
+    lyhyt: "Tankit, lokasuojat, istuimet",
+    kuvaus: "Tankit, lokasuojat, istuimet ja muut korin osat.",
+    kuva: "kuvat/lokasuojat.jpg"
+  },
+  {
+    id: "renkaat",
+    numero: "06",
+    nimi: "Renkaat & vanteet",
+    lyhyt: "Komplettipyörät ja yksittäiset",
+    kuvaus: "Komplettipyörät sekä yksittäiset renkaat ja vanteet.",
+    kuva: "kuvat/etunapa-pyora.jpg"
+  },
+  {
+    id: "pienosat",
+    numero: "07",
+    nimi: "Pienosat & tarvikkeet",
+    lyhyt: "Ruuvit, kaapelit, pikkutarvikkeet",
+    kuvaus: "Valot, mittaristot, jalkatapit, kahvat, kaapelit ja muut pienosat.",
+    kuva: "kuvat/kahvat-kytkimet.jpg"
+  },
+  {
+    id: "kaytetyt",
+    numero: "08",
+    nimi: "Käytetyt osat",
+    lyhyt: "Puretuista mopoista",
+    kuvaus: "",
+    kuva: "",
+    linkki: "index.html#kaytetyt"
   }
 ];

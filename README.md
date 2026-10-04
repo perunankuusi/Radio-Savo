@@ -8,7 +8,9 @@ Varaosasivusto Honda Monkeylle ja Skyteam-kopioille.
 |---|---|
 | `index.html` | Etusivu |
 | `tuote.html` | Tuotesivun pohja (yksi pohja kaikille tuotteille, ei tarvitse muokata) |
-| `tuotteet.js` | **Tuotteiden hinnat, kuvat ja tiedot. Muokkaa tätä.** |
+| `kategoria.html` | Kategoriasivun pohja (ei tarvitse muokata) |
+| `tuotteet.js` | **Tuotteiden ja kategorioiden tiedot, hinnat ja kuvat. Muokkaa tätä.** |
+| `apu.js` | Yhteiset toiminnot (ei tarvitse muokata) |
 | `tyyli.css` | Sivun ulkoasu |
 | `kuvat/` | Kaikki kuvat |
 
@@ -36,3 +38,15 @@ Ensimmäinen kuva näkyy etusivun kortissa. Jos kuvia on useita, tuotesivulle tu
 ## Uusi tuote
 
 Kopioi yksi `{ ... }`-lohko `tuotteet.js`:ssä, vaihda `id` (ei välilyöntejä eikä ääkkösiä) ja täytä tiedot. Tuote tulee etusivulle ja saa oman sivun osoitteeseen `tuote.html?id=<id>`.
+
+## Kategoriat
+
+Jokainen etusivun kategoriakortti avaa oman sivun (`kategoria.html?id=<id>`), jossa näkyvät kaikki siihen kuuluvat tuotteet. Kategoriat on listattu `tuotteet.js`:n lopussa (`KATEGORIAT`).
+
+Tuote liitetään kategoriaan tuotteen `kategoriat`-listassa. Tuote voi kuulua useampaan:
+
+```js
+kategoriat: ["etukeulat", "jarrut"],
+```
+
+Kategoria, jossa ei ole vielä tuotteita, näyttää tekstin "Osia tulossa" ja napin osan kysymiseen.

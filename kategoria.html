@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kategoria — Apinapaja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Permanent+Marker&family=Rubik+Spray+Paint&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tyyli.css">
+</head>
+<body>
+
+<div class="tape" aria-hidden="true">
+  <div class="tape-inner">★ APINAPAJA ★ VAIN MONKEYLLE ★ HONDA ★ SKYTEAM ★ KLOONIT ★ OSAT JOTKA SOPII OIKEASTI ★ APINAPAJA ★ VAIN MONKEYLLE ★</div>
+</div>
+
+<header>
+  <nav class="wrap">
+    <a class="wordmark" href="index.html" style="text-decoration:none;">APINA<span class="hi">PAJA</span></a>
+    <div class="navlinks">
+      <a href="index.html#osat">Osat</a>
+      <a href="index.html#kaytetyt">Käytetyt</a>
+      <a href="index.html#tietoa">Tietoa</a>
+      <a href="index.html#yhteys" class="cta">Kysy osaa</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap tuote" id="kategoria">
+  <noscript><p class="tuote-puuttuu">Sivu tarvitsee JavaScriptin. <a href="index.html">Takaisin etusivulle</a></p></noscript>
+</main>
+
+<footer class="wrap">
+  <span>© 2026 Apinapaja</span>
+  <span>Varaosat Honda Monkeylle, Skyteam-kopioille ja klooneille</span>
+</footer>
+
+<script src="tuotteet.js"></script>
+<script src="apu.js"></script>
+<script>
+(function(){
+  var root = document.getElementById('kategoria');
+  var id = new URLSearchParams(location.search).get('id');
+  var k = haeKategoria(id);
+
+  var crumbs = el('div', 'crumbs');
+  var back = el('a', null, '← Kaikki kategoriat');
+  back.href = 'index.html#osat';
+  crumbs.appendChild(back);
+  root.appendChild(crumbs);
+
+  if (!k) {
+    document.title = 'Kategoriaa ei löytynyt — Apinapaja';
+    var miss = el('div', 'tuote-puuttuu');
+    miss.appendChild(el('h1', null, 'Kategoriaa ei löytynyt'));
+    var a = el('a', 'btn btn-primary', 'Selaa kategorioita');
+    a.href = 'index.html#osat';
+    a.style.marginTop = '20px';
+    miss.appendChild(a);
+    root.appendChild(miss);
+    return;
+  }
+
+  document.title = k.nimi + ' — Apinapaja';
+
+  /* Otsikko */
+  var head = el('div', 'kat-head');
+  var txt = el('div');
+  if (k.numero) txt.appendChild(el('span', 'plate', k.numero));
+  txt.appendChild(el('h1', null, k.nimi));
+  if (k.kuvaus) txt.appendChild(el('p', 'tuote-lyhyt', k.kuvaus));
+  head.appendChild(txt);
+  if (k.kuva) {
+    var thumb = el('div', 'kat-kuva');
+    var img = document.createElement('img');
+    img.src = k.kuva;
+    img.alt = k.nimi;
+    thumb.appendChild(img);
+    head.appendChild(thumb);
+  }
+  root.appendChild(head);
+
+  /* Tuotteet */
+  var tuotteet = kategorianTuotteet(k.id);
+  if (tuotteet.length) {
+    var grid = el('div', 'product-grid');
+    grid.style.marginTop = '36px';
+    tuotteet.forEach(function (t) { grid.appendChild(luoTuotekortti(t)); });
+    root.appendChild(grid);
+  } else {
+    var tyhja = el('div', 'kat-tyhja');
+    tyhja.appendChild(el('h3', null, 'Osia tulossa'));
+    tyhja.appendChild(el('p', null, 'Tähän kategoriaan ei ole vielä lisätty osia sivulle. Moni osa on silti saatavilla — kysy suoraan!'));
+    root.appendChild(tyhja);
+  }
+
+  var cta = el('div', 'tuote-cta');
+  var ask = el('a', 'btn btn-primary', 'Etkö löytänyt? Kysy osaa');
+  ask.href = 'index.html?osa=' + encodeURIComponent(k.nimi) + '#yhteys';
+  cta.appendChild(ask);
+  root.appendChild(cta);
+})();
+</script>
+
+</body>
+</html>

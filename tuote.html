@@ -37,16 +37,10 @@
 </footer>
 
 <script src="tuotteet.js"></script>
+<script src="apu.js"></script>
 <script>
 (function(){
   var root = document.getElementById('tuote');
-
-  function el(tag, cls, text){
-    var e = document.createElement(tag);
-    if (cls) e.className = cls;
-    if (text !== undefined && text !== null) e.textContent = text;
-    return e;
-  }
 
   var id = new URLSearchParams(location.search).get('id');
   var t = null;
@@ -76,6 +70,14 @@
   }
 
   document.title = t.nimi + ' — Apinapaja';
+
+  var kat = (t.kategoriat && t.kategoriat.length) ? haeKategoria(t.kategoriat[0]) : null;
+  if (kat) {
+    crumbs.appendChild(document.createTextNode('  /  '));
+    var katLink = el('a', null, kat.nimi);
+    katLink.href = 'kategoria.html?id=' + encodeURIComponent(kat.id);
+    crumbs.appendChild(katLink);
+  }
 
   var grid = el('div', 'tuote-grid');
 
