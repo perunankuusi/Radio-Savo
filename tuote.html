@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tuote — Apinapaja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Permanent+Marker&family=Rubik+Spray+Paint&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tyyli.css">
+</head>
+<body>
+
+<div class="tape" aria-hidden="true">
+  <div class="tape-inner">★ APINAPAJA ★ VAIN MONKEYLLE ★ HONDA ★ SKYTEAM ★ KLOONIT ★ OSAT JOTKA SOPII OIKEASTI ★ APINAPAJA ★ VAIN MONKEYLLE ★</div>
+</div>
+
+<header>
+  <nav class="wrap">
+    <a class="wordmark" href="index.html" style="text-decoration:none;">APINA<span class="hi">PAJA</span></a>
+    <div class="navlinks">
+      <a href="index.html#tuotteet">Osat</a>
+      <a href="index.html#kaytetyt">Käytetyt</a>
+      <a href="index.html#tietoa">Tietoa</a>
+      <a href="index.html#yhteys" class="cta">Kysy osaa</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap tuote" id="tuote">
+  <noscript><p class="tuote-puuttuu">Tuotesivu tarvitsee JavaScriptin. <a href="index.html">Takaisin etusivulle</a></p></noscript>
+</main>
+
+<footer class="wrap">
+  <span>© 2026 Apinapaja</span>
+  <span>Varaosat Honda Monkeylle, Skyteam-kopioille ja klooneille</span>
+</footer>
+
+<script src="tuotteet.js"></script>
+<script>
+(function(){
+  var root = document.getElementById('tuote');
+
+  function el(tag, cls, text){
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined && text !== null) e.textContent = text;
+    return e;
+  }
+
+  var id = new URLSearchParams(location.search).get('id');
+  var t = null;
+  for (var i = 0; i < TUOTTEET.length; i++) {
+    if (TUOTTEET[i].id === id) { t = TUOTTEET[i]; break; }
+  }
+
+  var crumbs = el('div', 'crumbs');
+  var back = el('a', null, '← Kaikki osat');
+  back.href = 'index.html#tuotteet';
+  crumbs.appendChild(back);
+  root.appendChild(crumbs);
+
+  if (!t) {
+    document.title = 'Tuotetta ei löytynyt — Apinapaja';
+    var miss = el('div', 'tuote-puuttuu');
+    miss.appendChild(el('h1', null, 'Tuotetta ei löytynyt'));
+    var p = el('p', null, 'Tämä tuote on voinut poistua tai linkki on vanhentunut.');
+    p.style.color = 'var(--ink-soft)';
+    miss.appendChild(p);
+    var a = el('a', 'btn btn-primary', 'Selaa osia');
+    a.href = 'index.html#tuotteet';
+    a.style.marginTop = '20px';
+    miss.appendChild(a);
+    root.appendChild(miss);
+    return;
+  }
+
+  document.title = t.nimi + ' — Apinapaja';
+
+  var grid = el('div', 'tuote-grid');
+
+  /* --- Kuvat --- */
+  var galleryCol = el('div');
+  var main = el('div', 'gallery-main');
+  var kuvat = t.kuvat || [];
+  var mainImg = null;
+  if (kuvat.length) {
+    mainImg = document.createElement('img');
+    mainImg.src = kuvat[0];
+    mainImg.alt = t.nimi;
+    main.appendChild(mainImg);
+  } else {
+    main.appendChild(el('span', 'ei-kuvaa', 'Kuva tulossa'));
+  }
+  galleryCol.appendChild(main);
+
+  if (kuvat.length > 1) {
+    var thumbs = el('div', 'thumbs');
+    kuvat.forEach(function(src, idx){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', 'Kuva ' + (idx + 1));
+      if (idx === 0) b.setAttribute('aria-current', 'true');
+      var im = document.createElement('img');
+      im.src = src;
+      im.alt = '';
+      b.appendChild(im);
+      b.addEventListener('click', function(){
+        mainImg.src = src;
+        var all = thumbs.querySelectorAll('button');
+        for (var k = 0; k < all.length; k++) all[k].removeAttribute('aria-current');
+        b.setAttribute('aria-current', 'true');
+      });
+      thumbs.appendChild(b);
+    });
+    galleryCol.appendChild(thumbs);
+  }
+  grid.appendChild(galleryCol);
+
+  /* --- Tiedot --- */
+  var info = el('div', 'tuote-info');
+  if (t.tila) info.appendChild(el('span', 'plate', t.tila));
+  info.appendChild(el('h1', null, t.nimi));
+  if (t.lyhyt) info.appendChild(el('p', 'tuote-lyhyt', t.lyhyt));
+
+  info.appendChild(el('div', t.hinta ? 'tuote-hinta' : 'tuote-hinta kysy', t.hinta ? t.hinta : 'Kysy hintaa'));
+
+  if (t.kuvaus) info.appendChild(el('p', 'tuote-kuvaus', t.kuvaus));
+
+  if (t.tiedot && t.tiedot.length) {
+    var ul = el('ul', 'fact-list');
+    t.tiedot.forEach(function(pari){
+      var li = document.createElement('li');
+      li.appendChild(el('span', null, pari[0]));
+      li.appendChild(el('span', null, pari[1]));
+      ul.appendChild(li);
+    });
+    info.appendChild(ul);
+  }
+
+  var cta = el('div', 'tuote-cta');
+  var ask = el('a', 'btn btn-primary', 'Kysy tästä osasta');
+  ask.href = 'index.html?osa=' + encodeURIComponent(t.nimi) + '#yhteys';
+  var all = el('a', 'btn btn-outline', 'Muut osat');
+  all.href = 'index.html#tuotteet';
+  cta.appendChild(ask);
+  cta.appendChild(all);
+  info.appendChild(cta);
+
+  grid.appendChild(info);
+  root.appendChild(grid);
+})();
+</script>
+
+</body>
+</html>
